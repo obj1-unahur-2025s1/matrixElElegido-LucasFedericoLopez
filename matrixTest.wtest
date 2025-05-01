@@ -1,9 +1,33 @@
-
-
-describe "group of tests " {
-
-  test "test 01" {
-    assert.equals(100, 50+50)
+import matrix.*
+describe "Tests matrix" {
+  test "Aumenta la cantidad de pasajeros al subir uno" {
+    nave.subirPasajero(neo)
+    assert.equals(1, nave.cantPasajeros())
   }
-
+  test "Al bajar un pasajero, la cantidad de pasajeros disminuye" {
+    nave.subirPasajero(neo)
+    nave.bajarPasajero(morfeo)
+    assert.equals(1, nave.cantPasajeros())
+  }
+  test "Esta el elegido en la nave" {
+    nave.subirPasajero(neo)
+    assert.that(nave.elElegidoEstaEnLaNave())
+  }
+  test "el elegido no esta en la nave" {
+    nave.subirPasajero(morfeo)
+    nave.subirPasajero(trinity)
+    assert.notThat(nave.elElegidoEstaEnLaNave())
+  }
+  test "morfeo tiene mayor vitalidad que trinity" {
+    nave.subirPasajero(morfeo)
+    nave.subirPasajero(trinity)
+    assert.equals(morfeo,nave.pasajeroMayorVitalidad())
+  }
+  test "la nave choca y no queda ningun pasajero a bordo" {
+    nave.subirPasajero(morfeo)
+    nave.subirPasajero(trinity)
+    nave.subirPasajero(morfeo)
+    nave.naveChoca()
+    assert.equals(0, nave.cantPasajeros())
+  }
 }
